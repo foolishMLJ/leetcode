@@ -17,3 +17,34 @@
 *System.out.println("map是否包含key 1:" + map.containsKey("1"));
 *System.out.println("map是否包含value one:" + map.containsValue("one"));
 */ 
+/*******第一次做题，熟悉语法的同时也熟悉了如何在main函数中引用类，一个函数的开始运行一般需要从main函数开始，注意“变量初始化”“输入和输出”*****/
+
+import java.util.HashMap;
+import java.util.Map;
+public class Twosum {
+    public static void main(String[] args){
+        int[] nums = {1,2,3,4};
+        int target = 3;
+        resolution s = new resolution();
+        int[] a = s.twoSum(nums,target);
+        int i = a[0];
+        int j = a[1];
+        System.out.println("indice1="+i+"\n"+"indice2="+j);
+    }
+}
+
+class resolution {
+    public int[] twoSum(int[] numbers, int target) {
+        int[] result = new int[2];
+        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+        for (int i = 0; i < numbers.length; i++) {
+            if (map.containsKey(target - numbers[i])) {
+                result[1] = i + 1;
+                result[0] = map.get(target - numbers[i]);
+                return result;
+            }
+            map.put(numbers[i], i + 1);
+        }
+        return result;
+    }
+}
