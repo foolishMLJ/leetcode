@@ -1,0 +1,19 @@
+/*
+*Map（映射表）维护的是键-值的关联，调用Map<String,int>时，输入String类型的“键”，对应就要输出int类型的“值”
+*例如Map<String，Pet>可以作为使用一个String描述来查找Pet
+*public static PetMap{
+* public static void main(String[] args){
+*   Map<String,Pet> petMap = new HashMap<String,Pet>();
+*   petMap.put("My cat", new Cat("Molly"));
+*   petMap.put("My dog", new Dog("Ginger"));
+*   print(petMap);//Output:{My Cat=Cat Molly, My Dog=Dog Ginger}
+*   Pet dog = petMap.get("My Dog");
+*   print(dog);//Output:Dog Ginger
+*   print(petMap.containsKey);//Output:true
+*   print(petMap.containsValue);//Output:true
+* }
+*}
+*Map表的中键与值的对应关系,再如简单的对应关系：map.put("1","one")，前者标识表中的key，后者表示key对应的value
+*System.out.println("map是否包含key 1:" + map.containsKey("1"));
+*System.out.println("map是否包含value one:" + map.containsValue("one"));
+*/ 
