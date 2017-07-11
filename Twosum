@@ -18,23 +18,41 @@
 *System.out.println("map是否包含value one:" + map.containsValue("one"));
 */ 
 /*******第一次做题，熟悉语法的同时也熟悉了如何在main函数中引用类，一个函数的开始运行一般需要从main函数开始，注意“变量初始化”“输入和输出”*****/
+/****************************************************以下用两种算法解决问题***********************************************************/
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 public class TwoSum {
     public static void main(String[] args){
-        int[] nums = {1,2,3,4};
-        int target = 3;
+        int[] nums = {4,2,5,7,4,1,0,13};
+        int target = 13;
         solution s = new solution();
         int[] a = s.twoSum(nums,target);
         // int i = a[0];
         // int j = a[1];
-       // System.out.println("indice1="+i+"\n"+"indice2="+j);
+        // System.out.println("indice1="+i+"\n"+"indice2="+j);
         System.out.println(Arrays.toString(a));
     }
 }
+class solution{
+    public int[] twoSum(int[] numbers, int target){
+        int[] result = new int[2];
+        for (int i = 0;i<numbers.length-1;i++){
+            for (int j = i+1; j<numbers.length;j++){
+                int tar = numbers[i]+numbers[j];
+                if (tar == target){
+                    result[0] = i;
+                    result[1] = j;
+                    return result;
+                }else System.out.println("Nextline!");
+            }
+        }
+        return result;
+    }
+}
 
-class solution {
+/*class solution {
     public int[] twoSum(int[] numbers, int target) {
         int[] result = new int[2];
         Map<Integer, Integer> map = new HashMap<Integer, Integer>();
@@ -48,4 +66,4 @@ class solution {
         }
         return result;
     }
-}
+}*/
