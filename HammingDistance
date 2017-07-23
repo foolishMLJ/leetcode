@@ -1,0 +1,41 @@
+/***************************************************************************************************************************************/
+HammingDistace是两个相同长度字符对应位不同的数量，将两个数进行异或运算并统计结果中1的个数就是Hamming Distace的值
+/***************************************************************************************************************************************/
+
+解法一：使用Integer.bitCount来计算结果中1的个数
+public class HammingDistance {
+    static class solution{
+        public int hammingDistance(int x, int y) {
+            return Integer.bitCount(x^y);
+        }
+    }
+    public static void main(String[] args){
+        solution hamDis = new solution();
+        int HamDis = hamDis.hammingDistance(1,6);
+        System.out.println(HamDis);
+    }
+}
+
+解法二：每次向右移一位，和数字1相“与”计算每一位中1的个数
+static class solution{
+        public int hammingDistance(int x,int y){
+            int res = 0, exc = x^y;
+            for (int i = 0;i < 32;i++){
+                res += (exc >> i) & 1;
+            }
+            return res;
+        }
+    }
+   
+   
+解法三：数字exc中有n个1就能够有n次exc&（exc-1）！=0
+static class solution{
+     public int hammingDistace(int x, int y){
+         int res = 0, exc = x^y;
+         while (exc != 0){
+             ++res;
+             exc &= (exc-1);
+         }
+         return res;
+     }
+ }
