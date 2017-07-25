@@ -1,0 +1,31 @@
+/***********************************************************************************************************************************/
+对二叉树进行递归调用，判定二叉树上每个节点上的值， 
+        if (t1 == null)
+            return t2;
+        if (t2 == null)
+            return t1;
+        t1.val += t2.val;
+        这几行代码是对mergeTree这个方法的描述，接下来通过递归调用这个方法
+/***********************************************************************************************************************************/
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public TreeNode mergeTrees(TreeNode t1, TreeNode t2) {
+        if (t1 == null)
+            return t2;
+        if (t2 == null)
+            return t1;
+        t1.val += t2.val;
+        t1.left = mergeTrees(t1.left, t2.left);
+        t1.right = mergeTrees(t1.right, t2.right);
+        return t1;
+    }
+}
