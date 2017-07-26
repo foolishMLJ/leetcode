@@ -15,7 +15,7 @@ In addition, we can use below code to get big countries of more than 25 million 
 
 SELECT name, population, area FROM world WHERE population > 25000000
 As most people may already come into mind, we can use OR to combine these two solutions for the two sub-problems together.
-
+写的时候要严格按照题目中的查找顺序和限制数字来
 MySQL:
 /***************************************************************************************************************************/
 SELECT
