@@ -4,3 +4,26 @@
 每个单元格的周长是4，每个单元格上下或左右有1个相邻的单元格时，周长减2
 遍历一个二维的数组，每遍历到一个数，周长+2，检测上下左右如果有相邻单元格为1，每有一个相邻周长-2
 ／*************************************************************************************************************************／
+class Solution {
+    public int islandPerimeter(int[][] grid) {
+        int perimeter = 0;
+        for (int i = 0;i < grid.length; i++){
+            for (int j = 0; j < grid[i].length; j++){
+                if (grid[i][j] == 0){
+                    continue;
+                }
+                
+                if (grid[i][j] == 1){
+                    perimeter += 4;
+                    
+                    if (i > 0 && grid[i-1][j] == 1)
+                        perimeter -= 2;
+                    if (j > 0 && grid[i][j-1] == 1)
+                        perimeter -= 2;
+                }
+                
+            }
+        }
+        return perimeter;
+    }
+}
