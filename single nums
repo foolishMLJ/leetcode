@@ -1,0 +1,56 @@
+/****************************************************************************************************************************/
+按照网上的说法和我自己的理解，可以有两种方法：
+1、按照遍历的方式，把目标数和每一个数字都比较一遍，如果没有重复的数字就可以进行输出。时间复杂度是o(n2)。
+2、使用异或（xor又叫按位异或）的方法，因为A XOR A = 0，且XOR运算是可交换的，于是，对于实例{2,1,4,5,2,4,1}就会有这样的结果：
+  (2^1^4^5^2^4^1) => ((2^2)^(1^1)^(4^4)^(5)) => (0^0^0^5) => 5
+  就把只出现了一次的元素(其余元素均出现两次)给找出来了！
+  算法复杂度为O(n)，且不需要额外空间。
+/****************************************************************************************************************************/
+1、遍历法
+public class single {
+    public static void main(String[] args){
+            int[] nums = {1,2,3,4,4,1,3};
+            solution s= new solution();
+
+            int aims =  s.singleNumber(nums);
+            System.out.println("The single nums is "+aims);
+    }
+}
+public class solution {
+    public int singleNumber(int[] nums) {
+        int aims = 0;
+        int j = 0;
+        for(int i = 0;i < nums.length;i++){
+            for (j = 0;j < nums.length;j++){
+                if (i == j)
+                    continue;
+                else if (nums[i] == nums[j])
+                    break;
+            }
+            if (j == nums.length)//如果前面的for循环进行完毕再被跳出的情况下，j会再进行一次加法，所以会等于nums.length
+                aims = nums[i];//这说明在刚才的循环中没有相同的数字使循环跳出，从而得到目标值
+            else continue;
+        }
+        return aims;
+    }
+}
+
+2、xor
+public class single {
+    public static void main(String[] args){
+            int[] nums = {1,5,3,4,4,6,1,3,5};
+            solution s= new solution();
+
+            int aims =  s.singleNumber(nums);
+            System.out.println("The single nums is "+aims);
+    }
+}
+public class solution {
+    public int singleNumber(int[] nums) {
+        int aims = 0;
+        for (int i = 0; i < nums.length; i++) {
+            aims ^= nums[i];
+        }
+        return aims;
+    }
+}
