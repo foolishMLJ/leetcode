@@ -1,4 +1,101 @@
 /************************************************************************************************************************************/
 泛型ArrayList来构造数组，好处是啊实现动态数组，可以增加或者减少元素。方式：ArrayList<类型> List = new ArrayList<类型>()，类型可以String或者int等
+标志位法：因为数组中位置的范围为0~n-1，数组中数的范围是1~n，把原数组中出现的数对应的位置上的值置换为负值，这样再一次进行遍历的时候大于0的数所在的位置
+就是曾经没有出现的数
+http://blog.csdn.net/u010429424/article/details/69499568说的很有道理的样子
+重点在于对“所有出现过的数”做一个标志位的映射，这样数组中从未出现的数就会显示和其他数不同的特征，从而根据这个特征进行筛选
+下面是连同主函数在一起的程序，后面再附上另外一种方法
 /************************************************************************************************************************************/
+public class MainClass {
+    public static int[] stringToIntegerArray(String input) {
+        input = input.trim();
+        input = input.substring(1, input.length() - 1);
+        String[] parts = input.split(",");
+        int[] output = new int[parts.length];
+        for(int index = 0; index < parts.length; index++) {
+            String part = parts[index].trim();
+            output[index] = Integer.parseInt(part);
+        }
+        return output;
+    }
+    
+    public static String integerArrayListToString(List<Integer> nums, int length) {
+        String result = "";
+        for(int index = 0; index < length; index++) {
+            Integer number = nums.get(index);
+            result += Integer.toString(number) + ", ";
+        }
+        return result.substring(0, result.length() - 2);
+    }
+    
+    public static String integerArrayListToString(List<Integer> nums) {
+        return integerArrayListToString(nums, nums.size());
+    }
+    
+    public static void main(String[] args) throws IOException {
+        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+        String line;
+        while ((line = in.readLine()) != null) {
+            int[] nums = stringToIntegerArray(line);
+            
+            List<Integer> ret = new Solution().findDisappearedNumbers(nums);
+            
+            String out = integerArrayListToString(ret);
+            
+            System.out.print(out);
+        }
+    }
+}
+
+class Solution {
+    public List<Integer> findDisappearedNumbers(int[] nums) {
+        List<Integer> result = new ArrayList<Integer>();//构造动态数组
+        if (nums == null || nums.length == 0 )
+            return result;
+        int n = nums.length;
+        for(int i = 0; i < n ; i++){
+            int vals = Math.abs(nums[i]) - 1;
+            if(nums[vals] > 0){
+                nums[vals] = -nums[vals] ;
+            }
+        }
+        
+        for(int i = 0; i < n ;i++){
+            if(nums[i] > 0)
+                result.add(i+1);
+        }
+        return result;
+        
+    }
+}
+
+/************************************************************************************************************************************/
+另外一种标志位方法：构造一个新数组全为-1，让nums中的数-1对应为新数组中的标志位，从而nums中没有出现的数在num中对应位置上就会显示为-1
+class Solution {
+    public List<Integer> findDisappearedNumbers(int[] nums) {
+        List<Integer> result = new ArrayList<Integer>();//构造动态数组
+        if (nums == null || nums.length == 0 )
+            return result;
+        int n = nums.length;
+        int[] num = new int[n];
+        Arrays.fill(num,-1);
+        for(int i = 0; i < n ; i++){
+            num[nums[i]-1] = nums[i];
+            }
+        for(int i = 0; i < n ;i++){
+            if(num[i] == -1)
+                result.add(i+1);//num中的标志位与nums中的数是对应关系，即i+1对应nums[i]
+        }
+        return result;
+        
+    }
+}
+
+
+
+
+
+
+
+
 
