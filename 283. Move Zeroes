@@ -1,0 +1,87 @@
+/********************************************************************************************************************************/
+1、从末尾判断每个数是否为0，是0就与后面的数交换，直到后面的数不是0为止
+2、把所有非0的数放在开头，后面剩下的位置补0
+/********************************************************************************************************************************/
+
+1、
+class Solution {
+    public void moveZeroes(int[] nums) {
+        for (int i = nums.length-1; i >=0 ; i--){
+            if(nums[i] == 0){
+                int j = i;
+                while(j < nums.length-1 && nums[j+1] != 0){
+                    nums[j] = nums[j+1];
+                    nums[j+1] = 0;
+                    j++;
+                }
+            }
+        }
+    }
+}
+
+2、
+class Solution {
+    public void moveZeroes(int[] nums) {
+        int i = 0;
+        for (int num : nums){
+            if (num != 0){
+                nums[i] = num;
+                i++;
+            }
+        }
+        while(i < nums.length){
+            nums[i] = 0;
+            i++;
+        }
+    }
+}
+
+
+
+public class MainClass {
+    public static int[] stringToIntegerArray(String input) {
+        input = input.trim();
+        input = input.substring(1, input.length() - 1);
+        if (input.length() == 0) {
+          return new int[0];
+        }
+    
+        String[] parts = input.split(",");
+        int[] output = new int[parts.length];
+        for(int index = 0; index < parts.length; index++) {
+            String part = parts[index].trim();
+            output[index] = Integer.parseInt(part);
+        }
+        return output;
+    }
+    
+    public static String integerArrayToString(int[] nums, int length) {
+        String result = "";
+        if (length == 0) {
+            return result;
+        }
+    
+        for(int index = 0; index < length; index++) {
+            int number = nums[index];
+            result += Integer.toString(number) + ", ";
+        }
+        return result.substring(0, result.length() - 2);
+    }
+    
+    public static String integerArrayToString(int[] nums) {
+        return integerArrayToString(nums, nums.length);
+    }
+    
+    public static void main(String[] args) throws IOException {
+        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+        String line;
+        while ((line = in.readLine()) != null) {
+            int[] nums = stringToIntegerArray(line);
+            
+            new Solution().moveZeroes(nums);
+            String out = integerArrayToString(nums);
+            
+            System.out.print(out);
+        }
+    }
+}
