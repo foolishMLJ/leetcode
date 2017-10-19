@@ -39,7 +39,7 @@ class Solution {
 
 
 public class MainClass {
-    public static int[] stringToIntegerArray(String input) {
+    public static int[] stringToIntegerArray(String input) {//创建一个数组变量是字符串到整数数组的转换
         input = input.trim();
         input = input.substring(1, input.length() - 1);
         if (input.length() == 0) {
